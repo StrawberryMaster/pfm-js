@@ -1,10 +1,25 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const { EmbedBuilder, codeBlock } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('ping')
 		.setDescription('Replies with Pong!'),
 	async execute(interaction) {
-		await interaction.reply('Pong! :ping_pong:');
+		const databaseTiming = performance.now() - interaction.createdTimestamp;
+		const embed = new EmbedBuilder()
+			.setColor(Math.floor(Math.random() * 16777215))
+			.setTitle('Pong! :ping_pong:')
+			.addFields([
+				{
+					name: 'Websocket latency',
+					value: codeBlock(`${Math.floor(databaseTiming)}ms`),
+					inline: true,
+				},
+			])
+			.setTimestamp()
+			.setFooter({ text: 'Use /ping to retry.', iconURL: interaction.user.avatarURL() });
+
+		await interaction.reply({ embeds: [embed] });
 	},
 };
