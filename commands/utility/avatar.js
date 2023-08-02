@@ -1,4 +1,6 @@
-const { SlashCommandBuilder } = require('discord.js');
+// Attribution goes to from github.com/necrydark/Makima/master/commands/avatar.js for the inspiration
+
+const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -7,7 +9,31 @@ module.exports = {
 		.addUserOption(option => option.setName('target').setDescription('The user\'s avatar to show')),
 	async execute(interaction) {
 		const user = interaction.options.getUser('target');
-		if (user) return interaction.reply(`${user.username}'s avatar is: ${user.displayAvatarURL({ dynamic: true })}`);
-		return interaction.reply(`Here's your avatar: ${interaction.user.displayAvatarURL()}`);
+		if (user) {
+			const embed = new EmbedBuilder()
+				.setTitle(`:frame_photo: **${user.username}'s avatar**`)
+				.setColor(Math.floor(Math.random() * 16777215))
+				.setImage(`${user.displayAvatarURL({ dynamic: true, size: 1024 })}`)
+				.addFields(
+					{ name: 'Image links for download', value: `[.png](${user.avatarURL({ format: 'png' })}) | [.webp](${user.avatarURL({ dynamic: true })}) | [.jpg](${user.avatarURL({ format: 'jpg' })}) | [.gif](${user.avatarURL({ format: 'gif' })})` },
+				)
+				// .setDescription(`[png](${user.avatarURL({ format: 'png'})}) | [Webp](${user.avatarURL({dynamic: true})}) | [jpg](${user.avatarURL({format:'jpg'})}) | [gif](${user.avatarURL({format: 'gif'})})`)
+				.setFooter({ text: `Requested by: ${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
+
+			return interaction.reply({ embeds: [embed] });
+		}
+		else {
+			const embed = new EmbedBuilder()
+				.setTitle(`:frame_photo: **${user.username}'s avatar**`)
+				.setColor(Math.floor(Math.random() * 16777215))
+				.setImage(`${interaction.user.displayAvatarURL({ dynamic: true, size: 1024 })}`)
+				.addFields(
+					{ name: 'Image links (for download)', value: `[.png](${interaction.user.avatarURL({ format: 'png' })}) | [.webp](${interaction.user.avatarURL({ dynamic: true })}) | [.jpg](${interaction.user.avatarURL({ format: 'jpg' })}) | [.gif](${interaction.user.avatarURL({ format: 'gif' })})` },
+				)
+				// .setDescription(`[png](${interaction.user.avatarURL({ format: 'png'})}) | [Webp](${interaction.user.avatarURL({dynamic: true})}) | [jpg](${interaction.user.avatarURL({format:'jpg'})}) | [gif](${interaction.user.avatarURL({format: 'gif'})})`)
+				.setFooter({ text: `Requested by: ${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
+
+			return interaction.reply({ embeds: [embed] });
+		}
 	},
 };
