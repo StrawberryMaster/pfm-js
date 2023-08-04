@@ -1,5 +1,6 @@
 // Fortune - sends a random quote from a list of quotes. My favorite command! :D
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
+const { randomColor } = require('../../util/bananabread.js');
 
 const quotes = [
 	{ quote: 'First thing that\'s different, no more Dad. He threatened to turn me into the government so I made him and the government go away.', author: 'Rick Sanchez' },
@@ -25,7 +26,7 @@ module.exports = {
 	async execute(interaction) {
 		const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 		const embed = new EmbedBuilder()
-			.setColor(Math.floor(Math.random() * 16777215))
+			.setColor(randomColor)
 			.setTitle('Fortune of the day')
 			.setDescription(`"${randomQuote.quote}"`)
 			.addFields({ name: 'Author', value: randomQuote.author })

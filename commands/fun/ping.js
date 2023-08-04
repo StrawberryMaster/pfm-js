@@ -1,4 +1,5 @@
 const { codeBlock, EmbedBuilder, SlashCommandBuilder } = require('discord.js');
+const { randomColor } = require('../../util/bananabread.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -8,7 +9,7 @@ module.exports = {
 		const databaseTiming = Math.abs(Date.now() - interaction.createdTimestamp);
 		const userTiming = interaction.client.ws.ping;
 		const embed = new EmbedBuilder()
-			.setColor(Math.floor(Math.random() * 16777215))
+			.setColor(randomColor)
 			.setTitle('Pong! :ping_pong:')
 			.addFields([
 				{
