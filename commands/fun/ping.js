@@ -5,14 +5,25 @@ module.exports = {
 		.setName('ping')
 		.setDescription('Replies with the latency of the bot.'),
 	async execute(interaction) {
-		const databaseTiming = performance.now() - interaction.createdTimestamp;
+		const databaseTiming = Math.abs(Date.now() - interaction.createdTimestamp);
+		const userTiming = interaction.client.ws.ping;
 		const embed = new EmbedBuilder()
 			.setColor(Math.floor(Math.random() * 16777215))
 			.setTitle('Pong! :ping_pong:')
 			.addFields([
 				{
-					name: 'Websocket latency',
+					name: 'Database latency',
 					value: codeBlock(`${Math.floor(databaseTiming)}ms`),
+					inline: true,
+				},
+				{
+					name: 'User latency',
+					value: codeBlock(`${Math.floor(userTiming)}ms`),
+					inline: true,
+				},
+				{
+					name: 'Roundtrip latency',
+					value: codeBlock(`${Math.floor(databaseTiming + userTiming)}ms`),
 					inline: true,
 				},
 			])
