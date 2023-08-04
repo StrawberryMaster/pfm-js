@@ -1,10 +1,9 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { EmbedBuilder, codeBlock } = require('discord.js');
+const { codeBlock, EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('ping')
-		.setDescription('Replies with Pong!'),
+		.setDescription('Replies with the latency of the bot.'),
 	async execute(interaction) {
 		const databaseTiming = performance.now() - interaction.createdTimestamp;
 		const embed = new EmbedBuilder()

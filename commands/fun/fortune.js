@@ -1,6 +1,6 @@
 // Fortune - sends a random quote from a list of quotes. My favorite command! :D
+const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
-// List of quotes. This time, we're using an array instead of an object.
 const quotes = [
 	{ quote: 'First thing that\'s different, no more Dad. He threatened to turn me into the government so I made him and the government go away.', author: 'Rick Sanchez' },
 	{ quote: 'My friend\'s name was Megatron and he had [...] three things you should demand to know of any powerful institution. [...] In whose interest do you exercise power? [...] To whom are you accountable? [...] How can we get rid of you?', author: 'Optimus Prime' },
@@ -17,9 +17,6 @@ const quotes = [
 	{ quote: 'I\'m saving my earnings for an electron microscope! I\'ve only got nineteen thousand, four hundred and seventy-two dollars and eighteen cents to go!', author: 'Edd' },
 	{ quote: 'Behold, the Melt-inator 6-5000! It has a melting capacity... of 7! That\'s on a scale from 1 to 5, so that\'s a big number.', author: 'Dr. Heinz Doofenshmirtz' },
 ];
-
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
