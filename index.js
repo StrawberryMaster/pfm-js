@@ -1,6 +1,7 @@
 /* SM from the future: you're probably a dummy and forgot
  * how to run this. So here's a reminder: node index.js,
- * node . or npm start. You're welcome. */
+ * or 'node .' You're welcome.
+ * Bonus: you can also run node boot. */
 
 // Require the necessary discord.js classes
 const fs = require('node:fs');
