@@ -13,7 +13,7 @@ module.exports = {
 			const embed = new EmbedBuilder()
 				.setTitle(`:frame_photo: **${user.username}'s avatar**`)
 				.setColor(Math.floor(Math.random() * 16777215))
-				.setImage(`${user.displayAvatarURL({ dynamic: true, size: 1024 })}`)
+				.setImage(`${user.displayAvatarURL({ extension: 'png', size: 1024 })}`)
 				.addFields(
 					{ name: 'Image links for download', value: `[.png](${user.avatarURL({ format: 'png' })}) | [.webp](${user.avatarURL({ dynamic: true })}) | [.jpg](${user.avatarURL({ format: 'jpg' })}) | [.gif](${user.avatarURL({ format: 'gif' })})` },
 				)
@@ -26,7 +26,7 @@ module.exports = {
 			const embed = new EmbedBuilder()
 				.setTitle(`:frame_photo: **${user.username}'s avatar**`)
 				.setColor(Math.floor(Math.random() * 16777215))
-				.setImage(`${interaction.user.displayAvatarURL({ dynamic: true, size: 1024 })}`)
+				.setImage(`${interaction.user.displayAvatarURL({ extension: 'png', size: 1024 })}`)
 				.addFields(
 					{ name: 'Image links (for download)', value: `[.png](${interaction.user.avatarURL({ format: 'png' })}) | [.webp](${interaction.user.avatarURL({ dynamic: true })}) | [.jpg](${interaction.user.avatarURL({ format: 'jpg' })}) | [.gif](${interaction.user.avatarURL({ format: 'gif' })})` },
 				)

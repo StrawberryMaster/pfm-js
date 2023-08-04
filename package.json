@@ -17,7 +17,7 @@
   "author": "StrawberryMaster",
   "license": "MIT",
   "dependencies": {
-    "discord.js": "^14.12.2-dev.1691150664-7295a3a94.0"
+    "discord.js": "^14.12.1"
   },
   "devDependencies": {
     "eslint": "^8.41.0"
