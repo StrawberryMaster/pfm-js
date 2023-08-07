@@ -26,7 +26,7 @@ module.exports = {
 	async execute(interaction) {
 		const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 		const embed = new EmbedBuilder()
-			.setColor(randomColor)
+			.setColor(randomColor())
 			.setTitle('Fortune of the day')
 			.setDescription(`"${randomQuote.quote}"`)
 			.addFields({ name: 'Author', value: randomQuote.author })

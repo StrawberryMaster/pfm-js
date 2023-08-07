@@ -9,7 +9,7 @@ module.exports = {
 		const databaseTiming = Math.abs(Date.now() - interaction.createdTimestamp);
 		const userTiming = interaction.client.ws.ping;
 		const embed = new EmbedBuilder()
-			.setColor(randomColor)
+			.setColor(randomColor())
 			.setTitle('Pong! :ping_pong:')
 			.addFields([
 				{

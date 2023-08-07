@@ -13,7 +13,7 @@ module.exports = {
 		if (user) {
 			const embed = new EmbedBuilder()
 				.setTitle(`:frame_photo: **${user.username}'s avatar**`)
-				.setColor(randomColor)
+				.setColor(randomColor())
 				.setImage(`${user.displayAvatarURL({ extension: 'png', size: 1024 })}`)
 				.addFields(
 					{ name: 'Image links for download', value: `[.png](${user.avatarURL({ format: 'png' })}) | [.webp](${user.avatarURL({ dynamic: true })}) | [.jpg](${user.avatarURL({ format: 'jpg' })}) | [.gif](${user.avatarURL({ format: 'gif' })})` },
@@ -26,7 +26,7 @@ module.exports = {
 		else {
 			const embed = new EmbedBuilder()
 				.setTitle(`:frame_photo: **${interaction.user.username}'s avatar**`)
-				.setColor(randomColor)
+				.setColor(randomColor())
 				.setImage(`${interaction.user.displayAvatarURL({ extension: 'png', size: 1024 })}`)
 				.addFields(
 					{ name: 'Image links (for download)', value: `[.png](${interaction.user.avatarURL({ format: 'png' })}) | [.webp](${interaction.user.avatarURL({ dynamic: true })}) | [.jpg](${interaction.user.avatarURL({ format: 'jpg' })}) | [.gif](${interaction.user.avatarURL({ format: 'gif' })})` },
