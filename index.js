@@ -29,7 +29,7 @@ for (const folder of commandFolders) {
 			client.commands.set(command.data.name, command);
 		}
 		else {
-			console.log(`[ZOINKS] A command @ ${filePath} is missing a required data or execute property.`);
+			console.error(`[ZOINKS] A command @ ${filePath} is missing a required data or execute property.`);
 		}
 	}
 }

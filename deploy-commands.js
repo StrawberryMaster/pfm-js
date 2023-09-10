@@ -20,7 +20,7 @@ for (const folder of commandFolders) {
 			commands.push(command.data.toJSON());
 		}
 		else {
-			console.log(`[ZOINKS] A command @ ${filePath} is missing a required data or execute property.`);
+			console.error(`[ZOINKS] A command @ ${filePath} is missing a required data or execute property.`);
 		}
 	}
 }
