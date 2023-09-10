@@ -1,5 +1,6 @@
 # Tokens, keys and other secrets
 config.json
+bun.lockb
 
 # Logs
 logs

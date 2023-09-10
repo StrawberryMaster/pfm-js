@@ -17,9 +17,13 @@
   "author": "StrawberryMaster",
   "license": "MIT",
   "dependencies": {
-    "discord.js": "^14.12.1"
+    "discord.js": "^14.13.0"
   },
   "devDependencies": {
-    "eslint": "^8.46.0"
+    "eslint": "^8.49.0",
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }
