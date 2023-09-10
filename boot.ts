@@ -3,11 +3,18 @@ import fs, { WriteStream } from 'fs';
 
 function runScript(scriptPath: string, outputPath: string, scriptName: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    const process = spawn('node', [scriptPath]);
+    const process = spawn('bun', [scriptPath]);
     const outStream: WriteStream = fs.createWriteStream(outputPath, { flags: 'a' });
 
-    process.stdout?.pipe(outStream);
-    process.stderr?.pipe(outStream);
+    process.stdout.on('data', (data) => {
+      const now = new Date().toISOString();
+      outStream.write(`[${now}] [${scriptName}] ${data}`);
+    });
+
+    process.stderr.on('data', (data) => {
+      const now = new Date().toISOString();
+      outStream.write(`[${now}] [${scriptName}] ${data}`);
+    });
 
     console.log(`${scriptName} started successfully.`);
 
