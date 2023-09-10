@@ -1,7 +1,7 @@
 /* SM from the future: you're probably a dummy and forgot
- * how to run this. So here's a reminder: node index.js,
- * or 'node .' You're welcome.
- * Bonus: you can also run node boot. */
+ * how to run this. So here's a reminder: bun index.js,
+ * or 'bun .' You're welcome.
+ * Bonus: you can also run bun boot.ts */
 
 // Require the necessary discord.js classes
 const fs = require('node:fs');
