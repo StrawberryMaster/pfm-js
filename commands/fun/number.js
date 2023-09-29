@@ -1,15 +1,16 @@
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
-module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('number')
-		.setDescription('Guess the random number between 0-100'),
 /**
  * Executes the "number" command, which generates a random number between 0-50 and 51-100,
  * prompts the user to guess the number, and provides hints if the guess is incorrect.
  * @param {Interaction} interaction - The interaction object representing the command invocation.
  * @returns {Promise<void>}
  */
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('number')
+		.setDescription('Guess the random number between 0-100'),
+
 	async execute(interaction) {
 		const min1 = 0;
 		const max1 = 50;
