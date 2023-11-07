@@ -28,7 +28,10 @@ async function runScript(scriptPath: string, outputPath: string, scriptName: str
   });
 }
 
-Promise.all([
-  runScript('./deploy-commands.js', './deploy-commands.log', 'deploy-commands.js'),
-  runScript('./index.js', './index.log', 'index.js'),
-]).catch((error) => console.error(`Error: ${error.message}`));
+const scripts = [
+  { path: './deploy-commands.js', log: './deploy-commands.log', name: 'deploy-commands.js' },
+  { path: './index.js', log: './index.log', name: 'index.js' },
+];
+
+Promise.all(scripts.map(script => runScript(script.path, script.log, script.name)))
+  .catch((error) => console.error(`Error: ${error.message}`));
