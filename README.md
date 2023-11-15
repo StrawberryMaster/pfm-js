@@ -6,6 +6,7 @@
  <img src="https://img.shields.io/github/last-commit/StrawberryMaster/pfm-js?style=for-the-badge" alt="Last Commit">
  <img src="https://img.shields.io/github/languages/code-size/StrawberryMaster/pfm-js?style=for-the-badge" alt="Code Size">
 </p>
+
 A weird Discord bot, lover of cookies and banana bread. PFM uses the [Discord.js](https://discord.js.org) library.
 
 ## Installation
