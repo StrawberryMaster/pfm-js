@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { cyrb53a } = require('../../util/bananabread.js');
 
 const responses = [
 	'It is certain.',
@@ -35,7 +36,9 @@ module.exports = {
 				.setDescription('The question you want to ask the 8-ball.')
 				.setRequired(true)),
 	async execute(interaction) {
-		const response = responses[Math.floor(Math.random() * responses.length)];
+		const question = interaction.options.getString('question');
+		const seed = cyrb53a(question);
+		const response = responses[seed % responses.length];
 		await interaction.reply({ content: response });
 	},
 };
