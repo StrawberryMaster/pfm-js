@@ -4,10 +4,11 @@
  * Bonus: you can also run bun boot.ts */
 
 // Require the necessary discord.js classes
-const fs = require('fs');
-const path = require('path');
-const { Client, Collection, GatewayIntentBits } = require('discord.js');
-const { token } = require('./config.json');
+const { Client } = require('discord.js');
+import fs from 'fs';
+import path from 'path';
+import { token } from './config.json';
+import { Collection, GatewayIntentBits } from 'discord.js';
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });

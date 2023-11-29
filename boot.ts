@@ -29,8 +29,8 @@ async function runScript(scriptPath: string, outputPath: string, scriptName: str
 }
 
 const scripts = [
-  { path: './deploy-commands.js', log: './deploy-commands.log', name: 'deploy-commands.js' },
-  { path: './index.js', log: './index.log', name: 'index.js' },
+  { path: './deploy-commands.ts', log: './deploy-commands.log', name: 'deploy-commands.ts' },
+  { path: './index.ts', log: './index.log', name: 'index.ts' },
 ];
 
 Promise.all(scripts.map(script => runScript(script.path, script.log, script.name)))
