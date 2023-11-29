@@ -29,7 +29,7 @@ async function runScript(scriptPath: string, outputPath: string, scriptName: str
 }
 
 const scripts = [
-  { path: './deploy-commands.js', log: './deploy-commands.log', name: 'deploy-commands.js' },
+  { path: './deploy-commands.ts', log: './deploy-commands.log', name: 'deploy-commands.ts' },
   { path: './index.js', log: './index.log', name: 'index.js' },
 ];
 
