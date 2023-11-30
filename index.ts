@@ -1,5 +1,5 @@
 /* SM from the future: you're probably a dummy and forgot
- * how to run this. So here's a reminder: bun index.js,
+ * how to run this. So here's a reminder: bun index.ts,
  * or 'bun .' You're welcome.
  * Bonus: you can also run bun boot.ts */
 
