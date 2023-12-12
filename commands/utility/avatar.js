@@ -16,7 +16,7 @@ module.exports = {
 				.setColor(randomColor())
 				.setImage(`${user.displayAvatarURL({ extension: 'png', size: 1024 })}`)
 				.addFields(
-					{ name: 'Image links for download', value: `[.png](${user.avatarURL({ format: 'png' })}) | [.webp](${user.avatarURL({ dynamic: true })}) | [.jpg](${user.avatarURL({ format: 'jpg' })}) | [.gif](${user.avatarURL({ format: 'gif' })})` },
+					{ name: 'Image links for download', value: `[.png](${user.avatarURL({ extension: 'png' })}) | [.webp](${user.avatarURL({ extension: 'webp' })}) | [.jpg](${user.avatarURL({ extension: 'jpg' })}) | [.gif](${user.avatarURL({ extension: 'gif' })})` },
 				)
 				// .setDescription(`[png](${user.avatarURL({ format: 'png'})}) | [Webp](${user.avatarURL({dynamic: true})}) | [jpg](${user.avatarURL({format:'jpg'})}) | [gif](${user.avatarURL({format: 'gif'})})`)
 				.setFooter({ text: `Requested by: ${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
@@ -29,10 +29,10 @@ module.exports = {
 				.setColor(randomColor())
 				.setImage(`${interaction.user.displayAvatarURL({ extension: 'png', size: 1024 })}`)
 				.addFields(
-					{ name: 'Image links (for download)', value: `[.png](${interaction.user.avatarURL({ format: 'png' })}) | [.webp](${interaction.user.avatarURL({ dynamic: true })}) | [.jpg](${interaction.user.avatarURL({ format: 'jpg' })}) | [.gif](${interaction.user.avatarURL({ format: 'gif' })})` },
+					{ name: 'Image links (for download)', value: `[.png](${interaction.user.avatarURL({ extension: 'png' })}) | [.webp](${interaction.user.avatarURL({ extension: 'webp' })}) | [.jpg](${interaction.user.avatarURL({ extension: 'jpg' })}) | [.gif](${interaction.user.avatarURL({ extension: 'gif' })})` },
 				)
 				// .setDescription(`[png](${interaction.user.avatarURL({ format: 'png'})}) | [Webp](${interaction.user.avatarURL({dynamic: true})}) | [jpg](${interaction.user.avatarURL({format:'jpg'})}) | [gif](${interaction.user.avatarURL({format: 'gif'})})`)
-				.setFooter({ text: `Requested by: ${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
+				.setFooter({ text: `Requested by: ${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL({ extension: 'png' }) });
 
 			return interaction.reply({ embeds: [embed] });
 		}
