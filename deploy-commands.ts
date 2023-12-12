@@ -9,7 +9,7 @@ const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
 
 for (const folder of commandFolders) {
-	// Grab all the command files from the commands directory again
+	// Grab all the command files from the current folder
 	const commandsPath = path.join(foldersPath, folder);
 	const commandFiles = fs.readdirSync(commandsPath).filter((file: string) => file.endsWith('.js'));
 	// Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
@@ -28,7 +28,7 @@ for (const folder of commandFolders) {
 // Construct and prepare an instance of the REST module
 const rest = new REST().setToken(token);
 
-// Deploy! Deploy! Deploy!
+// Deploy the commands to Discord
 (async () => {
 	try {
 		console.log(`Now refreshing ${commands.length} application (/) commands.`);
@@ -42,7 +42,6 @@ const rest = new REST().setToken(token);
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
 	}
 	catch (error) {
-		// Catch and log them nasty errors
 		console.error(error);
 	}
 })();
