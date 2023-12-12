@@ -37,17 +37,19 @@ for (const folder of commandFolders) {
 
 // Set up the events
 const eventsPath = path.join(__dirname, 'events');
-const eventFiles = fs.readdirSync(eventsPath).filter((file: string) => file.endsWith('.js'));
+const eventFiles = fs.readdirSync(eventsPath).filter((file: string) => file.endsWith('.ts') || file.endsWith('.js'));
 
-for (const file of eventFiles) {
-	const filePath = path.join(eventsPath, file);
-	const event = require(filePath);
-    if (event.once) {
-		client.once(event.name, (...args: any) => event.execute(...args));
-	}
-	else {
-		client.on(event.name, (...args: any) => event.execute(...args));
-	}
-}
+(async () => {
+  for (const file of eventFiles) {
+    const filePath = path.join(eventsPath, file);
+    const event = await import(filePath);
+    if (event.default.once) {
+      client.once(event.default.name, (...args: any) => event.default.execute(...args));
+    }
+    else {
+      client.on(event.default.name, (...args: any) => event.default.execute(...args));
+    }
+  }
+})();
 // Log in to Discord with your client's token
 client.login(token);
