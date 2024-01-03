@@ -20,7 +20,7 @@ async function runScript(scriptPath: string, outputPath: string, scriptName: str
   await new Promise<void>((resolve, reject) => {
     process.on('close', (code) => {
       if (code !== 0) {
-        reject(new Error(`[JINKIES] Process exited with code ${code}.`));
+        reject(new Error(`Jinkies! ${scriptName} exited with code ${code}`));
       } else {
         resolve();
       }
