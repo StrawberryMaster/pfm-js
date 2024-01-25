@@ -1,19 +1,28 @@
 import { spawn } from 'child_process';
-import fs, { WriteStream } from 'fs';
+import fs from 'fs';
+import path from 'path';
+
+function createWriteStream(outputPath: string): fs.WriteStream {
+  const outStream = fs.createWriteStream(outputPath, { flags: 'a' });
+  outStream.on('error', (err) => console.error(`Error creating write stream: ${err.message}`));
+  return outStream;
+}
+
+async function handleDataStream(dataStream: NodeJS.ReadableStream, outStream: fs.WriteStream, scriptName: string): Promise<void> {
+  for await (const data of dataStream) {
+    const now = new Date().toISOString();
+    outStream.write(`[${now}] [${scriptName}] ${data}`);
+  }
+}
 
 async function runScript(scriptPath: string, outputPath: string, scriptName: string): Promise<void> {
   const process = spawn('bun', [scriptPath]);
-  const outStream = fs.createWriteStream(outputPath, { flags: 'a' });
+  const outStream = createWriteStream(outputPath);
 
-  for await (const data of process.stdout) {
-    const now = new Date().toISOString();
-    outStream.write(`[${now}] [${scriptName}] ${data}`);
-  }
-
-  for await (const data of process.stderr) {
-    const now = new Date().toISOString();
-    outStream.write(`[${now}] [${scriptName}] ${data}`);
-  }
+  await Promise.all([
+    handleDataStream(process.stdout, outStream, scriptName),
+    handleDataStream(process.stderr, outStream, scriptName),
+  ]);
 
   console.log(`${scriptName} started successfully.`);
 
@@ -29,8 +38,8 @@ async function runScript(scriptPath: string, outputPath: string, scriptName: str
 }
 
 const scripts = [
-  { path: './deploy-commands.ts', log: './deploy-commands.log', name: 'deploy-commands.ts' },
-  { path: './index.ts', log: './index.log', name: 'index.ts' },
+  { path: path.join(__dirname, 'deploy-commands.ts'), log: path.join(__dirname, 'deploy-commands.log'), name: 'deploy-commands.ts' },
+  { path: path.join(__dirname, 'index.ts'), log: path.join(__dirname, 'index.log'), name: 'index.ts' },
 ];
 
 Promise.all(scripts.map(script => runScript(script.path, script.log, script.name)))
