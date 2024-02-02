@@ -1,8 +1,6 @@
-// Psst: as of 29-11-2023, zlib.createBrotliDecompress is not
-// implemented in bun. This will only work on Node.js
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { randomColor } = require('../../util/bananabread.js');
-const axios = require('axios');
+const https = require('https');
 
 function getOption(interaction, optionName) {
 	return interaction.options.getString(optionName);
@@ -10,7 +8,23 @@ function getOption(interaction, optionName) {
 
 async function handleRequest(url, interaction) {
 	try {
-		return await axios.get(url);
+		const response = await new Promise((resolve, reject) => {
+			https.get(url, (res) => {
+				let data = '';
+				res.on('data', (chunk) => { data += chunk; });
+				res.on('end', () => {
+					try {
+						resolve(JSON.parse(data));
+					}
+					catch (error) {
+						reject(error);
+					}
+				});
+			}).on('error', (error) => {
+				reject(error);
+			});
+		});
+		return response;
 	}
 	catch (error) {
 		if (error.response) {
@@ -43,7 +57,7 @@ module.exports = {
 			const minecraftUserApi = `https://playerdb.co/api/player/minecraft/${minecraftUser}`;
 			const mcUserRes = await handleRequest(minecraftUserApi, interaction);
 
-			const player = mcUserRes.data.data.player;
+			const player = mcUserRes.data.player;
 
 			if (player) {
 				const mcUserSkin = `https://crafatar.com/renders/body/${player.id}`;
@@ -63,7 +77,7 @@ module.exports = {
 			const minecraftServerIconApi = `https://api.mcsrvstat.us/icon/${minecraftServer}`;
 			console.log(minecraftServerIconApi);
 
-			const server = mcServerRes.data;
+			const server = mcServerRes;
 
 			if (server.online === true) {
 				const embed = new EmbedBuilder()
