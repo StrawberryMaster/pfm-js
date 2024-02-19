@@ -23,7 +23,7 @@ module.exports = {
 				.setTitle('Your ASCII art')
 				.setDescription('```' + artData + '```')
 				.setTimestamp()
-				.setFooter({ text: 'Use /fortune to get a new quote.', iconURL: interaction.user.avatarURL() });
+				.setFooter({ text: 'Use /ascii to do a new art.', iconURL: interaction.user.avatarURL() });
 
 			await interaction.reply({ embeds: [embed] });
 		});
