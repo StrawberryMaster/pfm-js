@@ -60,7 +60,7 @@ module.exports = {
 			const player = mcUserRes.data.player;
 
 			if (player) {
-				const mcUserSkin = `https://crafatar.com/renders/body/${player.id}`;
+				const mcUserSkin = `https://crafatar.com/renders/body/${player.id}.png`;
 				const embed = new EmbedBuilder()
 					.setAuthor({ name: player.username, iconURL: player.avatar })
 					.setColor(randomColor())
