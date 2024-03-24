@@ -13,7 +13,7 @@ const quotes = [
 	{ quote: 'Nothing drives down real estate prices like a good old-fashioned gang war. Apart from an outbreak of plague, but that may be going too far in this case.', author: 'Donald Love' },
 	{ quote: 'I always look orange. And so do you. The light is the worst.', author: 'Donald Trump' },
 	{ quote: 'If you think nothing can get to you, you\'re lying to yourself. At best you\'re temporarily dead. A lightning bolt could re-animate you without a warning.', author: 'Max Payne' },
-	{ quote: 'I was thinking about why so many in the radical left participate in \'speedrunning\'. The reason is the left\'s lack of worth ethic... (\'go fast\' rather than \'do it right\') and, in a Petersonian sense... to elevate alternative sexual archetypes in the marketplace (\'fastest hedgehog\')... you\'re a beta male, Sonic.', author: 'Shadow the Hedgehog' },
+	{ quote: 'I was thinking about why so many in the radical left participate in \'speedrunning\'. The reason is the left\'s lack of work ethic... (\'go fast\' rather than \'do it right\') and, in a Petersonian sense... to elevate alternative sexual archetypes in the marketplace (\'fastest hedgehog\')... you\'re a beta male, Sonic.', author: 'Shadow the Hedgehog' },
 	{ quote: 'Welcome to Good Burger, home of the Good Burger. Can I take your order?', author: 'Ed, \'Good Burger\'' },
 	{ quote: 'I\'m saving my earnings for an electron microscope! I\'ve only got nineteen thousand, four hundred and seventy-two dollars and eighteen cents to go!', author: 'Edd' },
 	{ quote: 'Behold, the Melt-inator 6-5000! It has a melting capacity... of 7! That\'s on a scale from 1 to 5, so that\'s a big number.', author: 'Dr. Heinz Doofenshmirtz' },
