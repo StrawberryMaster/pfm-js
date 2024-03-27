@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
- <img src="https://img.shields.io/github/license/StrawberryMaster/pfm-js?style=flat-square" alt="License">
+ <a href="/LICENSE"><img src="https://img.shields.io/github/license/StrawberryMaster/pfm-js?style=flat-square" alt="License"></a>
  <img src="https://img.shields.io/github/package-json/v/StrawberryMaster/pfm-js?style=flat-square" alt="Version">
  <img src="https://img.shields.io/github/repo-size/StrawberryMaster/pfm-js?style=flat-square" alt="Size">
  <img src="https://img.shields.io/github/last-commit/StrawberryMaster/pfm-js?style=flat-square" alt="Last Commit">
@@ -20,7 +20,7 @@ A weird Discord bot, lover of cookies and banana bread. PFM uses the [Discord.js
 ### Requirements
 - either [Bun](https://bun.sh) or [Node.js](https://nodejs.org/en/) (v12 or higher)
 - [Git](https://git-scm.com/)
-- [discord.js](https://discord.js.org) (v13)
+- [discord.js](https://discord.js.org) (v14)
 - [figlet](https://www.npmjs.com/package/figlet) (necessary for the `ascii` command)
 
 ### Setting up your environment
@@ -32,7 +32,7 @@ A weird Discord bot, lover of cookies and banana bread. PFM uses the [Discord.js
 1. Go to the [Discord Developer Portal](https://discord.com/developers/applications)
 2. Click on "New Application" and give it a name
 3. Go to the "Bot" tab and click on "Add Bot"
-4. Click on "Copy" under "Token" and paste it into a file called `config.json` in the root of the repository. Don't share this token with anyone! It will look like this:
+4. Click on "Copy" under "Token" and paste it into a file called `config.json` in the root of the repository. **Don't share this token with anyone!** It will look like this:
 ```json
 {
     "token": "your-token-here"
