@@ -1,6 +1,5 @@
 import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
 import { randomColor } from '../../util/bananabread';
-import fetch from 'node-fetch';
 
 /** 
  * Represents an interaction with a user.

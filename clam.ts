@@ -1,4 +1,3 @@
-import fs from 'fs';
 import path from 'path';
 
 const scripts = [
@@ -8,10 +7,10 @@ const scripts = [
 
 scripts.forEach(script => {
     const logPath = path.resolve(__dirname, script.log);
-    const fileContent = fs.readFileSync(logPath, 'utf-8');
+    const fileContent = Bun.file(logPath);
 
     if (fileContent.length !== 0) {
-        fs.writeFileSync(logPath, '');
+        Bun.write(logPath, '');
         console.log(`The log file ${script.log} has been cleaned.`);
     } else {
         console.log(`The log file ${script.log} is already empty, skipping.`);
