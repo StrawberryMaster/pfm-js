@@ -14,11 +14,11 @@
  <img src="https://img.shields.io/github/languages/code-size/StrawberryMaster/pfm-js?style=flat-square" alt="Code Size">
 </p>
 
-A weird Discord bot, lover of cookies and banana bread. PFM uses the [Discord.js](https://discord.js.org) library.
+A weird Discord bot, lover of cookies and banana bread. He's nice though, we promise. PFM uses the [Discord.js](https://discord.js.org) library.
 
 ## Installation
 ### Requirements
-- either [Bun](https://bun.sh) or [Node.js](https://nodejs.org/en/) (v12 or higher)
+- either [Bun](https://bun.sh) or [Node.js](https://nodejs.org/en/) (v16.11.0 or higher)
 - [Git](https://git-scm.com/)
 - [discord.js](https://discord.js.org) (v14)
 - [figlet](https://www.npmjs.com/package/figlet) (necessary for the `ascii` command)
