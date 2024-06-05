@@ -21,7 +21,7 @@
     "figlet": "^1.7.0"
   },
   "devDependencies": {
-    "eslint": "^8.57.0",
+    "eslint": "^9.4.0",
     "bun-types": "latest"
   },
   "peerDependencies": {
