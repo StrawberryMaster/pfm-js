@@ -19,11 +19,11 @@
   "dependencies": {
     "discord.js": "^14.15.3",
     "figlet": "^1.7.0",
-    "npm": "^10.8.1"
+    "npm": "^10.8.2"
   },
   "devDependencies": {
     "bun-types": "latest",
-    "eslint": "^9.4.0"
+    "eslint": "^9.7.0"
   },
   "peerDependencies": {
     "typescript": "^5.2.2"
