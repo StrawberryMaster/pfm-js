@@ -1,6 +1,7 @@
 import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
+import { Readable } from 'stream';
 
 function createWriteStream(outputPath: string): fs.WriteStream {
   const outStream = fs.createWriteStream(outputPath, { flags: 'a' });
@@ -8,7 +9,7 @@ function createWriteStream(outputPath: string): fs.WriteStream {
   return outStream;
 }
 
-async function handleDataStream(dataStream: NodeJS.ReadableStream, outStream: fs.WriteStream, scriptName: string): Promise<void> {
+async function handleDataStream(dataStream: Readable, outStream: fs.WriteStream, scriptName: string): Promise<void> {
   for await (const data of dataStream) {
     const now = new Date().toISOString();
     outStream.write(`[${now}] [${scriptName}] ${data}`);
