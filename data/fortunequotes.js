@@ -1,5 +1,5 @@
 // for fortune.js
-module.exports = [
+export const quotes = [
 	{ quote: 'First thing that\'s different, no more Dad. He threatened to turn me into the government so I made him and the government go away.', author: 'Rick Sanchez' },
 	{ quote: 'My friend\'s name was Megatron and he had [...] three things you should demand to know of any powerful institution. [...] In whose interest do you exercise power? [...] To whom are you accountable? [...] How can we get rid of you?', author: 'Optimus Prime' },
 	{ quote: 'Our enemies are innovative and resourceful, and so are we. They never stop thinking about new ways to harm our country and our people, and neither do we.', author: 'George W. Bush' },
