@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { randomColor } = require('../../util/bananabread.js');
-const https = require('https');
+const axios = require('axios');
 
 function getOption(interaction, optionName) {
 	return interaction.options.getString(optionName);
@@ -8,23 +8,8 @@ function getOption(interaction, optionName) {
 
 async function handleRequest(url, interaction) {
 	try {
-		const response = await new Promise((resolve, reject) => {
-			https.get(url, (res) => {
-				let data = '';
-				res.on('data', (chunk) => { data += chunk; });
-				res.on('end', () => {
-					try {
-						resolve(JSON.parse(data));
-					}
-					catch (error) {
-						reject(error);
-					}
-				});
-			}).on('error', (error) => {
-				reject(error);
-			});
-		});
-		return response;
+		const response = await axios.get(url);
+		return response.data;
 	}
 	catch (error) {
 		if (error.response) {
