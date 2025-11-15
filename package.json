@@ -20,7 +20,7 @@
     "axios": "^1.12.2",
     "discord.js": "^14.22.1",
     "figlet": "^1.9.3",
-    "npm": "^11.6.0"
+    "npm": "^11.6.2"
   },
   "devDependencies": {
     "bun-types": "latest",
