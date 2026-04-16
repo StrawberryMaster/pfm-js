@@ -20,7 +20,7 @@ interface InteractionCreate {
 const interactionCreate: InteractionCreate = {
     name: "interactionCreate",
     async execute(interaction: Interaction) {
-        if (!interaction.isCommand()) return;
+        if (!interaction.isChatInputCommand()) return;
 
         const command = (interaction.client as unknown as Client).commands.get(interaction.commandName);
 
