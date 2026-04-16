@@ -11,7 +11,13 @@ import { token } from './config.json';
 import { Collection, GatewayIntentBits } from 'discord.js';
 
 // Create a new client instance
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
+});
 
 // Set up the commands collection
 client.commands = new Collection();
