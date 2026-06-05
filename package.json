@@ -17,14 +17,15 @@
   "author": "StrawberryMaster",
   "license": "MIT",
   "dependencies": {
-    "axios": "^1.15.0",
-    "discord.js": "^14.26.3",
+    "axios": "^1.17.0",
+    "discord.js": "^14.26.4",
     "figlet": "^1.11.0",
-    "npm": "^11.12.1"
+    "npm": "^11.16.0"
   },
   "devDependencies": {
+    "@types/node": "^25.9.2",
     "bun-types": "latest",
-    "eslint": "^10.2.0"
+    "eslint": "^10.4.1"
   },
   "peerDependencies": {
     "typescript": "^5.2.2"

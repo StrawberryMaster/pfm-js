@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { cyrb53a } = require('../../util/bananabread.js');
+const { cyrb53a } = require('../../util/bananabread.ts');
 
 const responses = [
 	'It is certain.',

@@ -1,45 +1,37 @@
-import { codeBlock, EmbedBuilder, SlashCommandBuilder } from 'discord.js';
+import { codeBlock, EmbedBuilder, SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js';
 import { randomColor } from '../../util/bananabread';
-
-/**
- * Represents an interaction with a user.
- */
-interface Interaction {
-    createdTimestamp: number;
-    client: { ws: { ping: number } };
-    user: { avatarURL: () => string };
-    reply: (content: any) => Promise<void>;
-}
 
 export const data = new SlashCommandBuilder()
     .setName('ping')
-    .setDescription('Replies with the latency of the bot.');
+    .setDescription('Replies with the bot\'s latency metrics.');
 
-export async function execute(interaction: Interaction) {
-    const databaseTiming = Math.abs(Date.now() - interaction.createdTimestamp);
-    const userTiming = interaction.client.ws.ping;
+export async function execute(interaction: ChatInputCommandInteraction) {
+    // send an initial placeholder response
+    const sent = await interaction.reply({ content: 'Pinging...', fetchReply: true });
+
+    // calculate the difference between Discord's generation timestamps
+    const apiLatency = sent.createdTimestamp - interaction.createdTimestamp;
+    
+    // retrieve the WebSocket gateway connection heartbeat
+    const gatewayLatency = interaction.client.ws.ping;
+
     const embed = new EmbedBuilder()
         .setColor(randomColor())
         .setTitle('Pong! :ping_pong:')
         .addFields([
             {
-                name: 'Database latency',
-                value: codeBlock(`${Math.floor(databaseTiming)}ms`),
+                name: 'API latency',
+                value: codeBlock(`${apiLatency}ms`),
                 inline: true,
             },
             {
-                name: 'User latency',
-                value: codeBlock(`${Math.floor(userTiming)}ms`),
+                name: 'Gateway latency',
+                value: codeBlock(`${gatewayLatency}ms`),
                 inline: true,
-            },
-            {
-                name: 'Roundtrip latency',
-                value: codeBlock(`${Math.floor(databaseTiming + userTiming)}ms`),
-                inline: true,
-            },
+            }
         ])
         .setTimestamp()
-        .setFooter({ text: 'Use /ping to retry.', iconURL: interaction.user.avatarURL() });
+        .setFooter({ text: 'Use /ping to retry.', iconURL: interaction.user.displayAvatarURL() });
 
-    await interaction.reply({ embeds: [embed] });
+    await interaction.editReply({ content: '', embeds: [embed] });
 }

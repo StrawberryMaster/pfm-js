@@ -1,6 +1,6 @@
 // Attribution goes to https://github.com/skillzl/eres/blob/main/commands/utils/whois.js for the original code
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { randomColor } = require('../../util/bananabread.js');
+const { randomColor } = require('../../util/bananabread.ts');
 
 module.exports = {
 	data: new SlashCommandBuilder()

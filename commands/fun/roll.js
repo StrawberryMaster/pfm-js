@@ -1,5 +1,5 @@
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { randomColor } = require('../../util/bananabread.js');
+const { randomColor } = require('../../util/bananabread.ts');
 
 module.exports = {
 	data: new SlashCommandBuilder()
