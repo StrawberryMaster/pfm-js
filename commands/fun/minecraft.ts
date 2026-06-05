@@ -1,79 +1,110 @@
-import { CommandInteraction, SlashCommandBuilder, EmbedBuilder, AttachmentBuilder } from 'discord.js';
+import { ChatInputCommandInteraction, SlashCommandBuilder, EmbedBuilder, AttachmentBuilder } from 'discord.js';
 import { randomColor } from '../../util/bananabread.js';
-import axios, { ResponseType } from 'axios';
-
-function getOption(interaction: any, optionName: string): string | null {
-    return interaction.options.getString(optionName);
-}
-
-async function handleRequest(url: string, interaction: any, responseType: ResponseType = 'json'): Promise<any> {
-    try {
-        const response = await axios.get(url, { responseType });
-        return response.data;
-    } catch (error: any) {
-        if (error.response) {
-            interaction.reply({ content: `${error.response.data.message}`, ephemeral: true });
-        } else if (error.request) {
-            interaction.reply({ content: 'There was an error making the request.', ephemeral: true });
-        } else {
-            interaction.reply({ content: 'An unexpected error occurred.', ephemeral: true });
-        }
-    }
-}
 
 export const data = new SlashCommandBuilder()
     .setName('minecraft')
-    .setDescription('Fetches a Minecraft user or server\'s information.')
-    .addStringOption(option =>
-        option.setName('player')
-            .setDescription('A player\'s username'))
-    .addStringOption(option =>
-        option.setName('server')
-            .setDescription('A server\'s IP address'))
+    .setDescription("Fetches a Minecraft user or server's information.")
+    .addSubcommand(subcommand =>
+        subcommand
+            .setName('player')
+            .setDescription("Fetches a Minecraft player's skin and profile.")
+            .addStringOption(option =>
+                option.setName('username')
+                    .setDescription("The player's username")
+                    .setRequired(true)
+            )
+    )
+    .addSubcommand(subcommand =>
+        subcommand
+            .setName('server')
+            .setDescription("Fetches a Minecraft server's status.")
+            .addStringOption(option =>
+                option.setName('ip')
+                    .setDescription("The server's IP address")
+                    .setRequired(true)
+            )
+    );
 
-export async function execute(interaction: CommandInteraction) {
-    const minecraftUser = getOption(interaction, 'player');
-    const minecraftServer = getOption(interaction, 'server');
+export async function execute(interaction: ChatInputCommandInteraction) {
+    await interaction.deferReply();
 
-    if (minecraftUser) {
-        const minecraftUserApi = `https://playerdb.co/api/player/minecraft/${minecraftUser}`;
-        const mcUserRes = await handleRequest(minecraftUserApi, interaction);
+    const subcommand = interaction.options.getSubcommand();
 
-        const player = mcUserRes.data.player;
+    try {
+        if (subcommand === 'player') {
+            const username = interaction.options.getString('username', true);
+            const playerDbUrl = `https://playerdb.co/api/player/minecraft/${username}`;
 
-        if (player) {
+            const response = await fetch(playerDbUrl);
+            if (!response.ok) {
+                await interaction.editReply(`Jinkies! Could not find a Minecraft player named "${username}".`);
+                return;
+            }
+
+            const mcUserRes = await response.json() as any;
+            const player = mcUserRes.data?.player;
+
+            if (!player) {
+                await interaction.editReply('Zoinks! Failed to retrieve player information.');
+                return;
+            }
+
             const mcUserSkinUrl = `https://crafatar.com/renders/body/${player.id}.png`;
-            const response = await handleRequest(mcUserSkinUrl, interaction, 'arraybuffer');
-            const attachment = new AttachmentBuilder(Buffer.from(response, 'binary'), { name: 'skin.png' });
+            const skinResponse = await fetch(mcUserSkinUrl);
+
+            if (!skinResponse.ok) {
+                await interaction.editReply('Yikes! Failed to retrieve the player skin.');
+                return;
+            }
+
+            const arrayBuffer = await skinResponse.arrayBuffer();
+            const attachment = new AttachmentBuilder(Buffer.from(arrayBuffer), { name: 'skin.png' });
+
             const embed = new EmbedBuilder()
                 .setAuthor({ name: player.username, iconURL: player.avatar })
                 .setColor(randomColor())
                 .setImage('attachment://skin.png');
 
-            await interaction.reply({ embeds: [embed], files: [attachment] });
+            await interaction.editReply({ embeds: [embed], files: [attachment] });
         }
-    }
 
-    if (minecraftServer) {
-        const minecraftServerApi = `https://api.mcsrvstat.us/3/${minecraftServer}`;
-        const mcServerRes = await handleRequest(minecraftServerApi, interaction);
+        if (subcommand === 'server') {
+            const serverIp = interaction.options.getString('ip', true);
+            const mcsrvstatUrl = `https://api.mcsrvstat.us/3/${serverIp}`;
 
-        const minecraftServerIconApi = `https://api.mcsrvstat.us/icon/${minecraftServer}`;
+            const response = await fetch(mcsrvstatUrl);
+            if (!response.ok) {
+                await interaction.editReply('Jinkies! Could not fetch server status.');
+                return;
+            }
 
-        const server = mcServerRes;
+            const server = await response.json() as any;
 
-        if (server.online === true) {
+            if (!server.online) {
+                await interaction.editReply(`Zoinks! The server \`${serverIp}\` is currently offline or unreachable.`);
+                return;
+            }
+
+            const line1 = server.motd?.clean?.[0] || 'A Minecraft Server';
+            const line2 = server.motd?.clean?.[1] || '';
+            const description = line2 ? `**${line1}**\n${line2}` : `**${line1}**`;
+
+            const minecraftServerIconApi = `https://api.mcsrvstat.us/icon/${serverIp}`;
+
             const embed = new EmbedBuilder()
-                .setDescription(`**${server.motd.clean[0]}** \n ${server.motd.clean[1]}`)
+                .setDescription(description)
                 .setColor(randomColor())
                 .addFields(
                     { name: 'Hostname', value: `${server.hostname || server.ip}`, inline: true },
-                    { name: 'Version', value: `${server.version}`, inline: true },
-                    { name: 'Players', value: `${server.players.online}/${server.players.max}`, inline: true },
+                    { name: 'Version', value: `${server.version || 'Unknown'}`, inline: true },
+                    { name: 'Players', value: `${server.players?.online ?? 0}/${server.players?.max ?? 0}`, inline: true },
                 )
                 .setThumbnail(minecraftServerIconApi);
 
-            await interaction.reply({ embeds: [embed] });
+            await interaction.editReply({ embeds: [embed] });
         }
+    } catch (error) {
+        console.error('Error executing minecraft command:', error);
+        await interaction.editReply('Yikes! An unexpected error occurred while executing this command.');
     }
 }
