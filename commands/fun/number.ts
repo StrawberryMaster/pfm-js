@@ -50,7 +50,7 @@ export async function execute(interaction: ChatInputCommandInteraction): Promise
     };
 
     const filter = (m: Message) => m.author.id === interaction.user.id && extractGuess(m.content) !== null;
-    const collector = channel.createMessageCollector({ filter, time: 15000 });
+    const collector = channel.createMessageCollector({ filter, time: 25000 });
 
     collector.on('collect', async (m: Message) => {
         const guess = extractGuess(m.content);
