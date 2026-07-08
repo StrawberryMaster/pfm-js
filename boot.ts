@@ -66,7 +66,7 @@ async function startBot(): Promise<void> {
   handleDataStream(botProcess.stderr!, botOutStream, 'index.ts');
 
   console.log('🚀 index.ts started successfully');
-  console.log('👉 Psst: here are vailable commands:');
+  console.log('👉 Psst: here are available commands:');
   console.log('   "rs" or "reload"   - Restart the bot process');
   console.log('   "deploy"           - Stop bot, redeploy slash commands, and restart');
   console.log('   "stop" or "exit"   - Safely shut down the bot and exit\n');
