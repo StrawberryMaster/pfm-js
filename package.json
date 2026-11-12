@@ -17,16 +17,16 @@
   "author": "StrawberryMaster",
   "license": "MIT",
   "dependencies": {
-    "axios": "^1.18.1",
-    "discord.js": "^14.26.4",
-    "figlet": "^1.11.0",
-    "npm": "^11.18.0"
+    "axios": "^1.21.1",
+    "discord.js": "^14.28.1",
+    "figlet": "^1.12.0",
+    "npm": "^11.21.2"
   },
   "devDependencies": {
     "@types/figlet": "^1.7.0",
-    "@types/node": "^26.1.1",
+    "@types/node": "^26.6.6",
     "bun-types": "latest",
-    "eslint": "^10.6.0"
+    "eslint": "^10.14.0"
   },
   "peerDependencies": {
     "typescript": "^5.2.2"
